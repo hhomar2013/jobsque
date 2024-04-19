@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 // import 'package:mtg/modules/toDoList/TasksScreen.dart';
 import 'package:sqflite/sqflite.dart';
 
-String uId = '';
-bool? isHome;
+
+bool? isHome;String uId = '';
 var titleController = TextEditingController();
 var timeController = TextEditingController();
 var dateController = TextEditingController();
@@ -19,6 +19,7 @@ var emailController = TextEditingController();
 var nameController = TextEditingController();
 var phoneController = TextEditingController();
 var passwordController = TextEditingController();
+final PageController _pageController = PageController();
 // List<Map> taskMap =[];
 // int currentIndex = 0;
 // List <String> pageTitle = [
