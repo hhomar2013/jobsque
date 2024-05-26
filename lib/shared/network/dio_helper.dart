@@ -5,7 +5,7 @@ class DioHelper {
   static init(){
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://newsapi.org/',
+        baseUrl: 'https://project2.amit-learning.com/api',
         receiveDataWhenStatusError: true,
 
       )
@@ -21,4 +21,20 @@ class DioHelper {
       queryParameters: query,
     );
   }
+
+  static Future<Response> postData({
+    required String url,
+    required Map<String, dynamic> data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    return await dio!.post(
+      url,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+    );
+  }
+
+
 }

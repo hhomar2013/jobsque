@@ -17,7 +17,6 @@ class createAccountCubit extends Cubit<createAccountState>{
    IconMenu(iconName: Icons.manage_accounts, titleIcon: 'Management') ,
    IconMenu(iconName: Icons.lan_outlined, titleIcon: 'Information Technology') ,
    IconMenu(iconName: Icons.travel_explore_outlined, titleIcon: 'Research and Analytics') ,
-
   ];
 
 
@@ -28,6 +27,8 @@ class IconMenu {
   final String titleIcon;
   IconMenu({required this.iconName, required this.titleIcon});
 }
+
+
 
 
 

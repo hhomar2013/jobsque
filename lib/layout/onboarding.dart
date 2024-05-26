@@ -27,8 +27,7 @@ class OnboardScreen extends StatelessWidget {
               title: Padding(
                 padding: EdgeInsets.symmetric(horizontal:10),
                 child: Image(
-                  image: AssetImage("assets/image/Logo.png"
-                  ),
+                  image: AssetImage("assets/image/Logo.png"),
                   width: 100,
                 ),
               ),
@@ -55,6 +54,9 @@ class OnboardScreen extends StatelessWidget {
                   child:
                   PageView.builder(
                     controller: controller,
+                    onPageChanged: (value){
+                      cubit.changeIndex(value);
+                    },
                     itemCount: cubit.Screens.length,
                     itemBuilder: (context, index) {
                       return cubit.Screens[index];
@@ -106,7 +108,7 @@ class OnboardScreen extends StatelessWidget {
                           },
                             child:Padding(
                               padding: const EdgeInsets.all(15),
-                              child: Text('Next',style: TextStyle(
+                              child: Text(cubit.currentIndex < cubit.Screens.length -1 ? 'Next' :'Get Started' ,style: TextStyle(
                                   color: Colors.white
                               )),
                             ),
@@ -128,5 +130,4 @@ class OnboardScreen extends StatelessWidget {
 
   }
 }
-
 

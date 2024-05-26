@@ -27,4 +27,11 @@ class onBoardingCubit extends Cubit<onBoardingState>{
     currentIndex++;
     emit(onBoardingNextState(currentIndex));
   }
+
+  void changeIndex(int value){
+    currentIndex = value;
+    emit(onBoardingNextState(currentIndex));
+  }
+
+
 }

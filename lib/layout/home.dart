@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:jobsque/modules/CreateAccount/bloc/create_account_cubit.dart';
 import 'package:jobsque/modules/CreateAccount/createAccount_screen.dart';
 import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';

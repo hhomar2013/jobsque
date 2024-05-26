@@ -45,7 +45,6 @@ class typeOfWorkScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final firstItemIndex = index * 2;
                           final secondItemIndex = firstItemIndex + 1;
-
                           return Row(
                             children: [
                               Expanded(
@@ -81,7 +80,7 @@ class typeOfWorkScreen extends StatelessWidget {
                                     ? InkWell(
 
                                   onTap: () {
-                                      emit(createAccountChangeColor());
+                                      // emit(createAccountChangeColor());
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(

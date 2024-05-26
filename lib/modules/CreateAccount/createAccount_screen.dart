@@ -14,57 +14,90 @@ class createAccountScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('Cereate Account',
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w500
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text('Cereate Account',
+                    style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500
+                    ),
                   ),
-                ),
-                Text('Please create an account to find your dream job',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(height: 40,),
-
-                defaultTextField(
-                  controller:nameController,
-                  label: "User Name",
-                  type: TextInputType.name,
-                  hintText: "User Name",
-                  prefix: Icons.person_2_outlined,
-                ), //username
-                SizedBox(height: 15,),
-                defaultTextField(
-                  controller:emailController,
-                  label: "Email",
-                  type: TextInputType.emailAddress,
-                  hintText: "Email",
-                  prefix: Icons.email_outlined,
-                ),//email
-                SizedBox(height: 15,),
-                defaultTextField(
-                  controller:passwordController,
-                  label: "Password",
-                  type: TextInputType.text,
-                  hintText: "Password",
-                  prefix: Icons.lock,
-                  suffix: Icons.visibility_off_outlined,
-                  isPassword: true,
-                ),//Password
-                SizedBox(height: 10,),
-                Text('Password must be at least 8 characters',
-                  style: TextStyle(
+                  Text('Please create an account to find your dream job',
+                    style: TextStyle(
                       fontSize: 16,
-                      color: Colors.grey
-                  ),)
-              ],
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(height: 40,),
+
+                  defaultTextField(
+                    controller:nameController,
+                    label: "User Name",
+                    type: TextInputType.name,
+                    hintText: "User Name",
+                    prefix: Icons.person_2_outlined,
+                    validate: (value){
+                      if(value == null || value.isEmpty){
+                        return 'Enter your name';
+                      }
+                      return null;
+                    }
+                  ), //username
+                  SizedBox(height: 15,),
+                  defaultTextField(
+                    controller:emailController,
+                    label: "Email",
+                    type: TextInputType.emailAddress,
+                    hintText: "Email",
+                    prefix: Icons.email_outlined,
+                      onChange: (value){
+                        if(value != null || value.toString().length > 8) {
+                        }
+                        return null;
+                      },
+                      validate: (value){
+                        if(value == null || value.isEmpty){
+                          return 'Enter your email';
+                        }else if (!value.contains("@")){
+                          return "Enter valid email";
+                        }
+                        return null;
+
+
+                      }
+                  ),//email
+                  SizedBox(height: 15,),
+                  defaultTextField(
+                    controller:passwordController,
+                    label: "Password",
+                    type: TextInputType.text,
+                    hintText: "Password",
+                    prefix: Icons.lock,
+                    suffix: Icons.visibility_off_outlined,
+                    obscureText: true,
+                    onChange: (value){
+                      if(value != null || value.toString().length > 8) {
+                        return 'Password must be at least 8 characters 🤦‍♂️😒';
+                      }
+                      return null;
+                    },
+                      validate: (value){
+                        if(value == null || value.toString().length < 8) {
+                          return 'Password must be at least 8 characters';
+                        }
+                        return null;
+                      }
+                  ),//Password
+                  SizedBox(height: 10,),
+
+
+                ],
+              ),
             ),
 
           ),
@@ -103,7 +136,9 @@ class createAccountScreen extends StatelessWidget {
                   primary: HexColor('#3366FF'),
                 ),
                 onPressed: (){
-                  navigateTo(context, typeOfWorkScreen());
+                  if (formKey.currentState!.validate()) {
+                    navigateTo(context, typeOfWorkScreen());
+                  }
                 },
                 child: Text('Create account',
                   style: TextStyle(

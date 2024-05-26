@@ -16,13 +16,17 @@ Widget defaultTextField({
   Function? validate ,
   Function? suffixPressed ,
   bool  isPassword = false,
+  bool obscureText = false,
   IconData? suffix ,
 }) => TextFormField(
+
   controller: controller,
   keyboardType: type,
+  obscureText: obscureText,
   onFieldSubmitted: (value){
     onSubmit!(value);
   },
+  autovalidateMode: AutovalidateMode.onUserInteraction,
   onChanged: (value){
     onChange!(value);
   },
