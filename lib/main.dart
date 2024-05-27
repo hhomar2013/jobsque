@@ -18,17 +18,20 @@ Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   isHome = CacheHelper.getData(key: 'isHome');
+  uId = CacheHelper.getData2(key: 'token');
   CacheHelper.putData(key: 'isHome', value: true);
-  runApp(MyApp(isHome));
+  runApp(MyApp(isHome,uId));
   print(isHome);
+  print("uid =$uId");
 }
 class MyApp extends StatelessWidget {
   final isHome;
-  const MyApp(this.isHome);
-
+  final uId;
+  const MyApp(this.isHome ,this.uId);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(

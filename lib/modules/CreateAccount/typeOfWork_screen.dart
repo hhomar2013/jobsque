@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_cubit.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_state.dart';
+import 'package:jobsque/shared/components/constant.dart';
 
 class typeOfWorkScreen extends StatelessWidget {
   typeOfWorkScreen({super.key});
@@ -19,11 +20,12 @@ class typeOfWorkScreen extends StatelessWidget {
               color: Colors.white,
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 70),
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+
                     Text(
                       'What type of work are you interested in?',
                       style: TextStyle(
@@ -62,8 +64,12 @@ class typeOfWorkScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                         children: [
-                                          Icon(cubit
-                                              .title[firstItemIndex].iconName),
+                                          CircleAvatar(
+                                            
+                                            child: Icon(cubit
+                                                .title[firstItemIndex].iconName),
+                                            backgroundColor: Colors.grey.shade100,
+                                          ),
                                           Text(cubit
                                               .title[firstItemIndex].titleIcon)
                                         ],

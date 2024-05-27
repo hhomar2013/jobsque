@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_cubit.dart';
 import 'package:jobsque/modules/CreateAccount/createAccount_screen.dart';
+import 'package:jobsque/modules/CreateAccount/typeOfWork_screen.dart';
 import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
 class HomeScreen extends StatelessWidget {
@@ -35,7 +36,7 @@ class HomeScreen extends StatelessWidget {
         // ),
 
       ),
-      body: createAccountScreen(),
+      body: uId == '' ?  createAccountScreen() : typeOfWorkScreen(),
     );
   }
 }
