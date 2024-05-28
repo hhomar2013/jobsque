@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:jobsque/shared/components/constant.dart';
 
 class DioHelper {
-  static Dio? dio  ;
+  static Dio? dio;
   static init(){
     dio = Dio(
       BaseOptions(
@@ -12,13 +13,27 @@ class DioHelper {
     );
   }
 
+  static Future<Response> getData1({
+    required String url,
+    required String token,
+    Options? options
+  })async{
+    dio?.options.headers['Authorization'] = 'Bearer $token';
+    return await dio!.get(
+        url,
+        // options:options
+    );
+  }
+
   static Future<Response> getData({
     required String url,
     required Map<String , dynamic> query,
+    Options? options
   })async{
     return await dio!.get(
       url,
       queryParameters: query,
+      options:options
     );
   }
 
@@ -35,6 +50,8 @@ class DioHelper {
       options: options,
     );
   }
+
+
 
 
 }

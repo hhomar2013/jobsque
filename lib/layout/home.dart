@@ -18,6 +18,7 @@ class Home extends StatelessWidget {
     return BlocConsumer<HomeCubit,HomeState>(
       builder: (context, state) {
       var cubit = HomeCubit.get(context);
+
         return Scaffold(
             body: cubit.screens[cubit.currentIndex],
             bottomNavigationBar: Padding(
@@ -28,6 +29,9 @@ class Home extends StatelessWidget {
                 selectedItemColor: HexColor('#3366FF'),
                 type: BottomNavigationBarType.fixed,
                 currentIndex: cubit.currentIndex ,
+                onTap: (value) {
+                  cubit.changeBottomNav(value);
+                },
                 items: const[
                   BottomNavigationBarItem(icon: Icon(Iconsax.home) ,label: 'Home'),
                   BottomNavigationBarItem(icon: Icon(Iconsax.message) ,label: 'message'),

@@ -6,6 +6,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:jobsque/layout/home.dart';
 import 'package:jobsque/layout/onboarding.dart';
 import 'package:jobsque/layout/register.dart';
+import 'package:jobsque/modules/Home/bloc/home_cubit.dart';
+import 'package:jobsque/modules/Home/bloc/home_state.dart';
+import 'package:jobsque/modules/login/login_screen.dart';
 import 'package:jobsque/shared/components/constant.dart';
 import 'package:jobsque/shared/network/dio_helper.dart';
 import 'package:jobsque/shared/network/local/cash_helper.dart';
@@ -32,28 +35,38 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
-    return  MaterialApp(
-      theme:  ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: HexColor('#3366FF'))
-      ),
-      debugShowCheckedModeBanner: false,
-      home: AnimatedSplashScreen(
-        splashIconSize: 200,
-        splashTransition: SplashTransition.fadeTransition,
-        pageTransitionType: PageTransitionType.fade,
-        centered: true,
-        splash: RippleAnimation(
-          repeat: true,
-          color: HexColor("#D6E4FF"),
-          minRadius: 90,
-          ripplesCount:3, size: Size.infinite,
-          child: Center(
-            child: Image.asset("assets/image/Logo.png"),
-          ),
-        )
-         , nextScreen: isHome == false || isHome == null ? OnboardScreen() : RegisterScreen()  ),);
-         //  , nextScreen: OnboardScreen(),));
+    return MultiBlocProvider(
+        providers:  [
+          BlocProvider(create: (context)=> HomeCubit()),
+        ],
+        child: BlocConsumer<HomeCubit,HomeState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return  MaterialApp(
+              theme:  ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: HexColor('#3366FF'))
+              ),
+              debugShowCheckedModeBanner: false,
+              home: AnimatedSplashScreen(
+                splashIconSize: 200,
+                splashTransition: SplashTransition.fadeTransition,
+                pageTransitionType: PageTransitionType.fade,
+                centered: true,
+                splash: RippleAnimation(
+                  repeat: true,
+                  color: HexColor("#D6E4FF"),
+                  minRadius: 90,
+                  ripplesCount:3, size: Size.infinite,
+                  child: Center(
+                    child: Image.asset("assets/image/Logo.png"),
+                  ),
+                )
+                 , nextScreen: isHome == false || isHome == null ? OnboardScreen() : loginScreen()  ),);
+          },
+        ));
+
+
+
   }
 
 }

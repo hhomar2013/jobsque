@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:jobsque/layout/home.dart';
+import 'package:jobsque/layout/register.dart';
+import 'package:jobsque/modules/login/login_screen.dart';
 import 'package:jobsque/modules/onboarding/bloc/cubit.dart';
 import 'package:jobsque/modules/onboarding/bloc/state.dart';
 import 'package:jobsque/modules/onboarding/on_screen.dart';
@@ -102,7 +104,7 @@ class OnboardScreen extends StatelessWidget {
                                   duration: Duration(microseconds: 2000)
                                   , curve: Curves.bounceInOut);
                             }else{
-                              navigateTo(context,Home());
+                              navigateTo(context,RegisterScreen());
                             }
 
                           },

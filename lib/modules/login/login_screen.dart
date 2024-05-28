@@ -5,6 +5,7 @@ import 'package:jobsque/layout/home.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_cubit.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_state.dart';
 import 'package:jobsque/modules/CreateAccount/typeOfWork_screen.dart';
+import 'package:jobsque/modules/Home/HomeScreen.dart';
 import 'package:jobsque/modules/login/bloc/login_cubit.dart';
 import 'package:jobsque/modules/login/bloc/login_state.dart';
 import 'package:jobsque/shared/components/components.dart';
@@ -202,7 +203,7 @@ class loginScreen extends StatelessWidget {
                                       email: emailLoginController.text,
                                       password: passwordLoginController.text
                                   );
-
+                                  navigateTo(context, HomeScreen());
                                   if(state is createAccountErrorState){
 
                                     // navigateTo(context, typeOfWorkScreen());

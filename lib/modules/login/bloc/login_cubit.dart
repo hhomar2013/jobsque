@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_state.dart';
 import 'package:jobsque/modules/login/bloc/login_state.dart';
+import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
 import 'package:jobsque/shared/network/dio_helper.dart';
 import 'package:jobsque/shared/network/local/cash_helper.dart';
@@ -26,6 +27,7 @@ class LoginCubit extends Cubit<loginState>{
     ).then((value) {
       emit(loginSuccessState());
       CacheHelper.saveData(key: 'token', value: value.data['token']);
+
     }).onError((error, stackTrace) {
       print(error.toString());
       emit(loginErrorState((error.toString())));
