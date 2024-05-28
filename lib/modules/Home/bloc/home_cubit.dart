@@ -19,6 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
     static HomeCubit get(context) => BlocProvider.of(context);
     List<dynamic> user=[];
     int currentIndex = 0;
+    List<Map> SuggestJob = [];
     List<Widget> screens = [
       HomeScreen(),
       MessageScreen(),
@@ -37,15 +38,29 @@ class HomeCubit extends Cubit<HomeState> {
       DioHelper.getData1(token: token,
           url: '/auth/profile',
       ).then((value){
-        print(value.data);
+        // print(value.data);
         model = UserModel.formJson(value.data);
-        print(model);
+        // print(model);
 
 
       }).catchError((error){
         emit(HomeGetUserErrorState(error.toString()));
       });
     }
+
+
+
+    void get_suggJob(){
+      DioHelper.getData1(
+       token: uId,
+          url:'/jobs/sugest/2'
+      ).then((value) {
+        SuggestJob.add(value.data['data']);
+        emit(HomeGetListSuccess());
+
+      });
+    }
+
 
 
 }

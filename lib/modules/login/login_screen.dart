@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/layout/home.dart';
+import 'package:jobsque/layout/register.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_cubit.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_state.dart';
 import 'package:jobsque/modules/CreateAccount/typeOfWork_screen.dart';
@@ -24,36 +26,13 @@ class loginScreen extends StatelessWidget {
         child: BlocConsumer<LoginCubit,loginState>(
             builder: (context, state) {
               var cubit = LoginCubit.get(context);
-
                 return  Scaffold(
                   resizeToAvoidBottomInset: false,
-                  // extendBodyBehindAppBar: true,
-                  appBar: AppBar(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    elevation: 0,
-                    actions: [
-                      Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Image(
-                            image: AssetImage("assets/image/Logo.png"),
-                            width: 100,
-                            height: 50
-                        ),
-                      )
-                    ],
-                    leading: IconButton(
-                      onPressed: (){
-                       navigateTo(context, Home());
-                      },
-                      icon: Icon(Icons.arrow_back),
-                    ),
-
-                  ),
                   body: Container(
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 150),
                           child: Form(
                             key: loginformKey,
                             child: Column(
@@ -74,14 +53,12 @@ class loginScreen extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: 40,),
-
-
                                 defaultTextField(
                                     controller:emailLoginController,
                                     label: "Email",
                                     type: TextInputType.emailAddress,
                                     hintText: "Email",
-                                    prefix: Icons.email_outlined,
+                                    prefix: Iconsax.user,
                                     onChange: (value){
                                       if(value != null || value.toString().length > 8) {
                                       }
@@ -104,8 +81,8 @@ class loginScreen extends StatelessWidget {
                                     label: "Password",
                                     type: TextInputType.text,
                                     hintText: "Password",
-                                    prefix: Icons.lock,
-                                    suffix: Icons.visibility_off_outlined,
+                                    prefix: Iconsax.lock,
+                                    suffix: Iconsax.eye_slash,
                                     obscureText: true,
                                     onChange: (value){
                                       if(value != null || value.toString().length > 8) {
@@ -123,19 +100,19 @@ class loginScreen extends StatelessWidget {
                                 Row(
                                   children: [
                                     Expanded(child:
-                                      Row(
-                                        children: [
-                                          Checkbox(
+                                    Row(
+                                      children: [
+                                        Checkbox(
                                             shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.circular(5)
                                             ),
-                                              value: cubit.isChecked,
-                                              onChanged: (bool? value){
-                                                cubit.isCheckedChange(value!);
-                                              }),
-                                          Text('Remember me'),
-                                        ],
-                                      )
+                                            value: cubit.isChecked,
+                                            onChanged: (bool? value){
+                                              cubit.isCheckedChange(value!);
+                                            }),
+                                        Text('Remember me'),
+                                      ],
+                                    )
                                     ),
                                     Expanded(child:
                                     Row(
@@ -176,7 +153,7 @@ class loginScreen extends StatelessWidget {
                                     ),
                                   ),
                                   TextButton(onPressed: (){
-                                    navigateTo(context, Home());
+                                    navigateTo(context, RegisterScreen());
                                   },
                                       child: Text('Register',
                                         style: TextStyle(
@@ -198,17 +175,11 @@ class loginScreen extends StatelessWidget {
                               ),
                               onPressed: (){
                                 if (loginformKey.currentState!.validate()) {
-
                                   cubit.login(
                                       email: emailLoginController.text,
                                       password: passwordLoginController.text
                                   );
-                                  navigateTo(context, HomeScreen());
-                                  if(state is createAccountErrorState){
-
-                                    // navigateTo(context, typeOfWorkScreen());
-                                  }
-
+                                  navigateTo(context, Home());
                                 }
                               },
                               child: Text('Login',

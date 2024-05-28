@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_state.dart';
 import 'package:jobsque/shared/components/constant.dart';
 import 'package:jobsque/shared/network/dio_helper.dart';
@@ -40,7 +41,7 @@ class createAccountCubit extends Cubit<createAccountState>{
 
 
   final List<IconMenu> title  =[
-   IconMenu(iconName: Icons.abc_outlined, titleIcon: 'UI/UX Designer') ,
+   IconMenu(iconName: Iconsax.bezier, titleIcon: 'UI/UX Designer') ,
    IconMenu(iconName: Icons.photo_camera_front, titleIcon: 'Illustrator Designer') ,
    IconMenu(iconName: Icons.html, titleIcon: 'Developer') ,
    IconMenu(iconName: Icons.manage_accounts, titleIcon: 'Management') ,

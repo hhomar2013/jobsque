@@ -42,10 +42,6 @@ class LoginCubit extends Cubit<loginState>{
     }
 
 
-
-
-
-
   final List<IconMenu> title  =[
    IconMenu(iconName: Icons.abc_outlined, titleIcon: 'UI/UX Designer') ,
    IconMenu(iconName: Icons.photo_camera_front, titleIcon: 'Illustrator Designer') ,

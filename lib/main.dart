@@ -61,7 +61,9 @@ class MyApp extends StatelessWidget {
                     child: Image.asset("assets/image/Logo.png"),
                   ),
                 )
-                 , nextScreen: isHome == false || isHome == null ? OnboardScreen() : loginScreen()  ),);
+                 , nextScreen:
+              isHome == false || isHome == null ? OnboardScreen()
+                  : uId == false || uId == null ? loginScreen() : Home()  ),);
           },
         ));
 

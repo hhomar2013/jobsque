@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:jobsque/layout/home.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_cubit.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_state.dart';
 import 'package:jobsque/modules/CreateAccount/typeOfWork_screen.dart';
@@ -145,18 +146,12 @@ class createAccountScreen extends StatelessWidget {
                             ),
                             onPressed: (){
                               if (formKey.currentState!.validate()) {
-
                                   cubit.register(
                                       name: nameController.text,
                                       email: emailController.text,
                                       password: passwordController.text
                                   );
-
-                                  if(state is createAccountErrorState){
-
-                                    // navigateTo(context, typeOfWorkScreen());
-                                  }
-
+                                  navigateTo(context, Home());
                               }
                             },
                             child: Text('Create account',

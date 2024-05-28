@@ -7,3 +7,4 @@ class HomeGetUserErrorState extends HomeState{
   final error ;
   HomeGetUserErrorState(this.error);
 }
+class HomeGetListSuccess extends HomeState{}

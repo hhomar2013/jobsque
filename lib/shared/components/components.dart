@@ -1,5 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 // import 'package:mtg/modules/newsapp/webview.dart';
 // import 'package:mtg/modules/toDoList/cubit/cubit.dart';
 // import 'package:mtg/shared/components/constant.dart';
@@ -106,169 +107,75 @@ Widget defaultIconButton({
     )
 );
 
-// Widget buildTaskItem(Map model , context) => Dismissible( // updating , remove , nav to UI
-//   key: Key(model['id'].toString()),
-//   child: Padding(
-//     padding: EdgeInsets.all(20),
-//     child: Row(
-//       children: [
-//         CircleAvatar(
-//           radius: 40,
-//           child: Text(
-//             "${model['time']}" ,
-//           ),
-//         ),
-//         SizedBox(width: 20,),
-//         Column(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             Text(
-//               '${model['title']}',
-//               style: TextStyle(
-//                 fontSize: 18,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//             Text(
-//               '${model['date']}',
-//               style: TextStyle(
-//                 color: Colors.grey,
-//               ),
-//             ),
-//           ],
-//         ),
-//         SizedBox(width: 20,),
-//         IconButton(
-//             onPressed: (){
-//               AppCubit.get(context).updateData(status:'done', id: model['id'],); // update data
-//             },
-//             icon: Icon(
-//               Icons.check_box,
-//               color: Colors.orangeAccent,
-//             )
-//         ),
-//         IconButton(
-//           onPressed: (){
-//             AppCubit.get(context).updateData(status: 'archive', id:model['id'],); // update data
-//           },
-//           icon: Icon(
-//             Icons.archive,
-//             color: Colors.orangeAccent,
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-//   onDismissed: (direction){ // for deleting
-//     AppCubit.get(context).deleteData(id: model['id']);
-//     },
-// );
-// Widget taskBuilder({
-//   required List<Map> tasks ,
-// }) => ConditionalBuilder(
-//   condition: tasks.length > 0,
-//   builder: (context) => ListView.separated(
-//     itemBuilder: (context , index ) => buildTaskItem(tasks[index], context),
-//     separatorBuilder: (context , index ) => SizedBox(height: 20),
-//     itemCount: tasks.length ,
-//   ),
-//   fallback: (context) => Center(
-//     child: Padding(
-//       padding: const EdgeInsets.all(20.0),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Icon(
-//             Icons.menu,
-//             size: 100,
-//             color: Colors.grey,
-//           ),
-//           Text(
-//             'No Tasks Yet , Please add some tasks',
-//             style: TextStyle(
-//               fontSize: 50,
-//             ),
-//           )
-//
-//         ],
-//       ),
-//     ),
-//   ),
-// );
+Widget buildJobItem(Map model , context) => Center(
+    child: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18,vertical: 16),
+          child: Container(
+            height: 183,
+            width: 300,
+            decoration: BoxDecoration(
+              color: HexColor('#091A7A'),
+              borderRadius: BorderRadius.circular(12),
 
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18,vertical: 16),
+          child: Container(
+            height: 183,
+            width: 300,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(12),
 
-// Widget buildArticleItem(article ,context) =>  InkWell(
-//   onTap: (){
-//     navigateTo(context , WebViewScreen('${article['url']}'));
-//   },
-//   child: Padding(
-//     padding: const EdgeInsets.all(20.0),
-//     child: Row(
-//       children: [
-//         Container(
-//           width: 120,
-//           height: 120,
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(10),
-//             image:  DecorationImage(
-//               image: article['urlToImage'] == null ? NetworkImage('https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') : NetworkImage('${article['urlToImage']}') ,
-//               fit: BoxFit.cover,
-//             ),
-//
-//           ),
-//         ),
-//         const SizedBox(width: 20,),
-//         Expanded(
-//           child: Container(
-//             height: 120,
-//             child:  Column(
-//               mainAxisAlignment: MainAxisAlignment.start,
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               // mainAxisSize: MainAxisSize.min,
-//               children: [
-//                 Expanded(
-//                   child: Text(
-//                    '${article['title']}',
-//                     style: Theme.of(context).textTheme.bodyText1,
-//                     maxLines: 4,
-//                     overflow: TextOverflow.ellipsis,
-//                   ),
-//                 ),
-//                 Text(
-//                   '${article['publishedAt']}',
-//                   style: TextStyle(
-//                       color: Colors.grey
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// ) ;
+            ),
+            child:
+            Row(
+              children: [
 
-// Widget articleBuilder({required List list, context , searchItem = false}) => ConditionalBuilder(
-//   condition: list.length > 0,
-//   builder: (context) => ListView.separated(
-//     itemBuilder: (context , index ) => buildArticleItem(list[index], context),
-//     separatorBuilder: (context , index ) => SizedBox(height: 20),
-//     itemCount: list.length ,
-//   ),
-//   fallback: (context) =>  searchItem ? Container() : Center(child:
-//   // Column(
-//   //   mainAxisAlignment: MainAxisAlignment.center,
-//   //   crossAxisAlignment: CrossAxisAlignment.center,
-//   // children: [
-//   //   Icon(Icons.business),
-//   //   Text('Sorry No data',
-//   //   style: Theme.of(context).textTheme.bodyText1,
-//   //   )
-//   // ],
-//   // ),
-//     CircularProgressIndicator(),
-//   ),
-// );
+              ],
+            )
+            ,
+          ),
+        ),
+      ],
+    ),
+
+);
+Widget jobBuilder({
+  required List<Map> suggJop ,
+}) => ConditionalBuilder(
+  condition: suggJop.length > 0,
+  builder: (context) => ListView.separated(
+    itemBuilder: (context , index ) => buildJobItem(suggJop[index], context),
+    separatorBuilder: (context , index ) => SizedBox(height: 20),
+    itemCount: suggJop.length ,
+  ),
+  fallback: (context) => Center(
+    child: Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.menu,
+            size: 100,
+            color: Colors.grey,
+          ),
+          Text(
+            'No jobs Yet , ',
+            style: TextStyle(
+              fontSize: 50,
+            ),
+          )
+
+        ],
+      ),
+    ),
+  ),
+);
 
 void navigateTo(context , widget) => Navigator.push(context, MaterialPageRoute(builder: (context) => widget,));

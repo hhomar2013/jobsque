@@ -18,7 +18,6 @@ class Home extends StatelessWidget {
     return BlocConsumer<HomeCubit,HomeState>(
       builder: (context, state) {
       var cubit = HomeCubit.get(context);
-
         return Scaffold(
             body: cubit.screens[cubit.currentIndex],
             bottomNavigationBar: Padding(
