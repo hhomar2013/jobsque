@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:jobsque/layout/home.dart';
 import 'package:jobsque/layout/onboarding.dart';
+import 'package:jobsque/layout/register.dart';
 import 'package:jobsque/shared/components/constant.dart';
 import 'package:jobsque/shared/network/dio_helper.dart';
 import 'package:jobsque/shared/network/local/cash_helper.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return  MaterialApp(
+      theme:  ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: HexColor('#3366FF'))
+      ),
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         splashIconSize: 200,
@@ -48,7 +52,7 @@ class MyApp extends StatelessWidget {
             child: Image.asset("assets/image/Logo.png"),
           ),
         )
-         , nextScreen: isHome == false || isHome == null ? OnboardScreen() : HomeScreen()  ),);
+         , nextScreen: isHome == false || isHome == null ? OnboardScreen() : RegisterScreen()  ),);
          //  , nextScreen: OnboardScreen(),));
   }
 

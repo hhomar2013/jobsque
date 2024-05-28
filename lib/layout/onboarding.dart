@@ -35,7 +35,7 @@ class OnboardScreen extends StatelessWidget {
                 MaterialButton(
                   onPressed: (){
                     // print('skip');
-                    navigateTo(context,HomeScreen());
+                    navigateTo(context,Home());
                   } ,
                   child: Text('Skip',
                     style: TextStyle(
@@ -102,7 +102,7 @@ class OnboardScreen extends StatelessWidget {
                                   duration: Duration(microseconds: 2000)
                                   , curve: Curves.bounceInOut);
                             }else{
-                              navigateTo(context,HomeScreen());
+                              navigateTo(context,Home());
                             }
 
                           },

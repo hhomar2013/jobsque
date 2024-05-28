@@ -43,7 +43,7 @@ dependencies:
   awesome_ripple_animation: ^2.0.0
   smooth_page_indicator: ^1.1.0
   font_awesome_flutter: ^10.7.0
-
+  iconsax: ^0.0.8
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

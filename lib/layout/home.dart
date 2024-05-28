@@ -2,41 +2,52 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_cubit.dart';
 import 'package:jobsque/modules/CreateAccount/createAccount_screen.dart';
 import 'package:jobsque/modules/CreateAccount/typeOfWork_screen.dart';
+import 'package:jobsque/modules/Home/HomeScreen.dart';
+import 'package:jobsque/modules/Home/bloc/home_cubit.dart';
+import 'package:jobsque/modules/Home/bloc/home_state.dart';
 import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
+class Home extends StatelessWidget {
+  const Home({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Image(
-                image: AssetImage("assets/image/Logo.png"),
-                width: 100,
-                height: 50
-            ),
-          )
-        ],
-        // leading: IconButton(
-        //   onPressed: (){
-        //     Navigator.pop(context);
-        //   },
-        //   icon: Icon(Icons.arrow_back),
-        // ),
+    return BlocConsumer<HomeCubit,HomeState>(
+      builder: (context, state) {
+      var cubit = HomeCubit.get(context);
+        return Scaffold(
+            body: cubit.screens[cubit.currentIndex],
+            bottomNavigationBar: Padding(
+              padding: const EdgeInsets.all(15),
+              child: BottomNavigationBar(
+                backgroundColor: Colors.white,
+                elevation:0,
+                selectedItemColor: HexColor('#3366FF'),
+                type: BottomNavigationBarType.fixed,
+                currentIndex: cubit.currentIndex ,
+                items: const[
+                  BottomNavigationBarItem(icon: Icon(Iconsax.home) ,label: 'Home'),
+                  BottomNavigationBarItem(icon: Icon(Iconsax.message) ,label: 'message'),
+                  BottomNavigationBarItem(icon: Icon(Iconsax.briefcase) ,label: 'Applied'),
+                  BottomNavigationBarItem(icon: Icon(Iconsax.archive_1) ,label: 'Saved'),
+                  BottomNavigationBarItem(icon: Icon(Iconsax.profile_tick) ,label: 'Profile'),
+                ],
+              ),
+            )
 
-      ),
-      body: uId == '' ?  createAccountScreen() : typeOfWorkScreen(),
-    );
+        );
+    }, listener: (context, state) {
+
+    },);
+
+
+
   }
+
 }
+
+
+

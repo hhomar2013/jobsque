@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_cubit.dart';
 import 'package:jobsque/modules/CreateAccount/bloc/create_account_state.dart';
 import 'package:jobsque/modules/CreateAccount/typeOfWork_screen.dart';
+import 'package:jobsque/modules/login/login_screen.dart';
 import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
 
@@ -75,8 +76,6 @@ class createAccountScreen extends StatelessWidget {
                                       return "Enter valid email";
                                     }
                                     return null;
-
-
                                   }
                               ),//email
                               SizedBox(height: 15,),
@@ -123,7 +122,9 @@ class createAccountScreen extends StatelessWidget {
                                     fontSize: 14,
                                   ),
                                 ),
-                                TextButton(onPressed: (){},
+                                TextButton(onPressed: (){
+                                  navigateTo(context, loginScreen());
+                                },
                                     child: Text('Login',
                                       style: TextStyle(
                                         color: HexColor('#3366FF'),
