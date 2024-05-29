@@ -25,8 +25,8 @@ Future<void> main() async{
   uId = CacheHelper.getData2(key: 'token');
   CacheHelper.putData(key: 'isHome', value: true);
   runApp(MyApp(isHome,uId));
-  print(isHome);
-  print("uid =$uId");
+  // print(isHome);
+  // print("uid =$uId");
 }
 class MyApp extends StatelessWidget {
   final isHome;

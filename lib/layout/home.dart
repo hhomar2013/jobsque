@@ -19,6 +19,7 @@ class Home extends StatelessWidget {
       builder: (context, state) {
       var cubit = HomeCubit.get(context);
         return Scaffold(
+          resizeToAvoidBottomInset: false,
             body: cubit.screens[cubit.currentIndex],
             bottomNavigationBar: Padding(
               padding: const EdgeInsets.all(15),

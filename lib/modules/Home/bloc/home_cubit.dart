@@ -51,17 +51,37 @@ class HomeCubit extends Cubit<HomeState> {
 
 
     void get_suggJob(){
+      emit(HomeLoadingState());
       DioHelper.getData1(
        token: uId,
           url:'/jobs/sugest/2'
       ).then((value) {
-        SuggestJob.add(value.data['data']);
-        emit(HomeGetListSuccess());
+        if(value.statusCode == 200){
+          SuggestJob.add(value.data['data']);
+          print(SuggestJob);
+          emit(HomeGetListSuccess());
+        }else{
+          SuggestJob = [];
+        }
 
       });
+    }
+
+    String formatNumberToK(int number) {
+      if (number >= 1000000000) {
+        return (number / 1000000000).toStringAsFixed(1) + 'B';
+      } else if (number >= 1000000) {
+        return (number / 1000000).toStringAsFixed(1) + 'M';
+      } else if (number >= 1000) {
+        return (number / 1000).toStringAsFixed(1) + 'K';
+      } else {
+        return number.toString();
+      }
     }
 
 
 
 }
+
+
 
