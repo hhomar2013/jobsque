@@ -15,37 +15,46 @@ class Home extends StatelessWidget {
   const Home({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit,HomeState>(
-      builder: (context, state) {
-      var cubit = HomeCubit.get(context);
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-            body: cubit.screens[cubit.currentIndex],
-            bottomNavigationBar: Padding(
-              padding: const EdgeInsets.all(15),
-              child: BottomNavigationBar(
-                backgroundColor: Colors.white,
-                elevation:0,
-                selectedItemColor: HexColor('#3366FF'),
-                type: BottomNavigationBarType.fixed,
-                currentIndex: cubit.currentIndex ,
-                onTap: (value) {
-                  cubit.changeBottomNav(value);
-                },
-                items: const[
-                  BottomNavigationBarItem(icon: Icon(Iconsax.home) ,label: 'Home'),
-                  BottomNavigationBarItem(icon: Icon(Iconsax.message) ,label: 'message'),
-                  BottomNavigationBarItem(icon: Icon(Iconsax.briefcase) ,label: 'Applied'),
-                  BottomNavigationBarItem(icon: Icon(Iconsax.archive_1) ,label: 'Saved'),
-                  BottomNavigationBarItem(icon: Icon(Iconsax.profile_tick) ,label: 'Profile'),
-                ],
+    return BlocProvider(
+      create: (BuildContext context)=> HomeCubit.get(context)..get_suggJob(),
+      child: BlocConsumer<HomeCubit,HomeState>(
+        builder: (context, state) {
+          HomeCubit cubit = HomeCubit.get(context);
+          return Scaffold(
+            key: scaffoldState,
+            resizeToAvoidBottomInset: false,
+              appBar: AppBar(
+                title: Text(
+                    cubit.pageTitle[cubit.currentIndex]
+                ),
               ),
-            )
+              body: cubit.screens[cubit.currentIndex],
+              bottomNavigationBar: Padding(
+                padding: const EdgeInsets.all(15),
+                child: BottomNavigationBar(
+                  backgroundColor: Colors.white,
+                  elevation:0,
+                  selectedItemColor: HexColor('#3366FF'),
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: cubit.currentIndex ,
+                  onTap: (value) {
+                    cubit.changeBottomNav(value);
+                  },
+                  items: const[
+                    BottomNavigationBarItem(icon: Icon(Iconsax.home) ,label: 'Home'),
+                    BottomNavigationBarItem(icon: Icon(Iconsax.message) ,label: 'message'),
+                    BottomNavigationBarItem(icon: Icon(Iconsax.briefcase) ,label: 'Applied'),
+                    BottomNavigationBarItem(icon: Icon(Iconsax.archive_1) ,label: 'Saved'),
+                    BottomNavigationBarItem(icon: Icon(Iconsax.profile_tick) ,label: 'Profile'),
+                  ],
+                ),
+              )
 
-        );
-    }, listener: (context, state) {
+          );
+      }, listener: (context, state) {
 
-    },);
+      },),
+    );
 
 
 
