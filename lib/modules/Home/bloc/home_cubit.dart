@@ -28,8 +28,16 @@ class HomeCubit extends Cubit<HomeState> {
       ProfileScreen(),
     ];
 
+    List <String> pageTitle = [
+      'Home',
+      'Message',
+      'Applied',
+      'Saved',
+      'Profile',
+    ];
+
     void changeBottomNav(int index){
-      currentIndex = index;
+      currentIndex = index;;
       emit(HomeChangeBottomNav());
     }
     late UserModel model;
@@ -51,32 +59,26 @@ class HomeCubit extends Cubit<HomeState> {
 
 
     void get_suggJob(){
+      SuggestJob = [];
       emit(HomeLoadingState());
-      DioHelper.getData1(
-       token: uId,
+      DioHelper.getData1(token: token,
           url:'/jobs/sugest/2'
       ).then((value) {
         if(value.statusCode == 200){
-          SuggestJob.add(value.data['data']);
-          print(SuggestJob);
-          emit(HomeGetListSuccess());
+          print('success');
+          value.data.forEach((element) {
+            SuggestJob.add(element);
+          });
+          print( SuggestJob[0]);
         }else{
-          SuggestJob = [];
+          print('closed');
         }
+        emit(HomeGetListSuccess());
 
       });
-    }
 
-    String formatNumberToK(int number) {
-      if (number >= 1000000000) {
-        return (number / 1000000000).toStringAsFixed(1) + 'B';
-      } else if (number >= 1000000) {
-        return (number / 1000000).toStringAsFixed(1) + 'M';
-      } else if (number >= 1000) {
-        return (number / 1000).toStringAsFixed(1) + 'K';
-      } else {
-        return number.toString();
-      }
+
+
     }
 
 
