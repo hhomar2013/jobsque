@@ -15,39 +15,31 @@ class MessageScreen extends StatelessWidget {
       child: BlocConsumer<HomeCubit,HomeState>(
         builder:(context, state) {
             var cubit = HomeCubit.get(context);
-            return  Scaffold(
-              appBar: AppBar(
-                title: Text(
-                    'message'
+            return  ListView(
+              // This next line does the trick.
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                Container(
+                  width: 160,
+                  color: Colors.red,
                 ),
-
-              ),
-              body: ListView(
-                // This next line does the trick.
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                    width: 160,
-                    color: Colors.red,
-                  ),
-                  Container(
-                    width: 160,
-                    color: Colors.blue,
-                  ),
-                  Container(
-                    width: 160,
-                    color: Colors.green,
-                  ),
-                  Container(
-                    width: 160,
-                    color: Colors.yellow,
-                  ),
-                  Container(
-                    width: 160,
-                    color: Colors.orange,
-                  ),
-                ],
-              ),
+                Container(
+                  width: 160,
+                  color: Colors.blue,
+                ),
+                Container(
+                  width: 160,
+                  color: Colors.green,
+                ),
+                Container(
+                  width: 160,
+                  color: Colors.yellow,
+                ),
+                Container(
+                  width: 160,
+                  color: Colors.orange,
+                ),
+              ],
             );
         },
         listener:(context, state) {}

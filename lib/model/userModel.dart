@@ -12,6 +12,7 @@ class UserModel{
 
   factory UserModel.formJson(Map<String,dynamic>? json){
     return UserModel(
+
         name: json?['name'],
         email: json?['email'],
       created_at: json?['created_at'],

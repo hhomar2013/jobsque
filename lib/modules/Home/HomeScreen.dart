@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:jobsque/model/jobsModel.dart';
 import 'package:jobsque/model/userModel.dart';
 import 'package:jobsque/modules/Home/bloc/home_cubit.dart';
 import 'package:jobsque/modules/Home/bloc/home_state.dart';
@@ -15,69 +16,71 @@ import 'package:jobsque/shared/components/constant.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     // print(uId);
     return BlocConsumer<HomeCubit,HomeState>(
+
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
-          print(cubit);
+          if(state is HomeGetListSuccess){
+            // print(state.jobModel);
+          }
+
           return Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Hi, 👋',
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500
-                            ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Hi, ${cubit.user[0]['name']} 👋',
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500
                           ),
-                          Text('Create a better future for yourself here',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500
+                        ),
+                        Text('Create a better future for yourself here',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500
+                          ),
+                        )
+                      ],
+                    ),
+                  ), // Welcome Text
+                  Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal:20),
+                            child: Container(
+                              child: IconButton(onPressed: () {
+                                print('notification');
+                              }, icon: Icon(
+                                Icons.notifications_outlined,
+                                size: 30,
+                              ),
+
+                              ),
+                              decoration:BoxDecoration(
+                                  border: Border.all(
+                                    width: 1,
+                                    color: HexColor('#D1D5DB'),
+                                  ),
+                                  borderRadius:  BorderRadius.circular(50)
+                              ) ,
+
                             ),
                           )
                         ],
-                      ),
-                    ), // Welcome Text
-                    Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal:20),
-                              child: Container(
-                                child: IconButton(onPressed: () {
-                                  print('notification');
-                                }, icon: Icon(
-                                  Icons.notifications_outlined,
-                                  size: 30,
-                                ),
-
-                                ),
-                                decoration:BoxDecoration(
-                                    border: Border.all(
-                                      width: 1,
-                                      color: HexColor('#D1D5DB'),
-                                    ),
-                                    borderRadius:  BorderRadius.circular(50)
-                                ) ,
-
-                              ),
-                            )
-                          ],
-                        )),
-                    // Notification icon
-                  ],
-                ),
+                      )),
+                  // Notification icon
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
@@ -106,7 +109,7 @@ class HomeScreen extends StatelessWidget {
 
                     )
                 ),
-              ),
+              ),//Search
               Row(
                 children: [
                   Expanded(
@@ -147,7 +150,7 @@ class HomeScreen extends StatelessWidget {
                       )
                   ),
                 ],
-              ),
+              ),//Suggested Job
               Container(
                 height: 220,
                 margin:  EdgeInsets.symmetric(vertical: 20),
@@ -171,47 +174,45 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(20),
-                                child: Expanded(
-
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50)
-                                    ),
-                                    child: Image(
-                                      height: 30,
-                                      width: 30,
-                                      image: NetworkImage(
-                                        cubit.SuggestJob[0]['image'],
-                                      ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50)
+                                  ),
+                                  child: Image(
+                                    height: 30,
+                                    width: 30,
+                                    image: NetworkImage(
+                                      cubit.SuggestJob[index]['image'],
                                     ),
                                   ),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal:5,vertical: 15),
-                                child: Expanded(
-
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        cubit.SuggestJob[0]['name'],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      cubit.SuggestJob[index]['name'],
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      Text(
-                                        cubit.SuggestJob[0]['comp_name'] + '.',
-                                        style: TextStyle(
-                                          color: HexColor('#9CA3AF'),
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+
+                                    ),
+                                    Text(
+                                      cubit.SuggestJob[index]['comp_name'] + '.',
+                                      style: TextStyle(
+                                        color: HexColor('#9CA3AF'),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
 
@@ -234,7 +235,7 @@ class HomeScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        cubit.SuggestJob[0]['job_time_type'],
+                                        cubit.SuggestJob[index]['job_time_type'],
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400,
@@ -259,7 +260,7 @@ class HomeScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        cubit.SuggestJob[0]['job_type'],
+                                        cubit.SuggestJob[index]['job_type'],
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400,
@@ -285,7 +286,7 @@ class HomeScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w500,
                                         fontSize: 20,
                                       ),
-                                      cubit.SuggestJob[0]['salary'].toString(),
+                                      cubit.SuggestJob[index]['salary'].toString(),
                                     ),
                                     Text(
                                       '/Month',
@@ -308,10 +309,10 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                         child: TextButton(
                                             onPressed: () {
-
                                             },
                                             child: Text('Apply Now', style: TextStyle(
-                                                color: Colors.white
+                                                color: Colors.white,
+                                              fontSize: 10
                                             ),)),
                                       )
                                     ],
@@ -330,14 +331,12 @@ class HomeScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20 ),
-                      child: Text('Recent Job',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500
-                        ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20 ),
+                    child: Text('Recent Job',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500
                       ),
                     ),
                   ),
@@ -348,7 +347,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(onPressed: () {
-                            print('View all');
+                            cubit.profile();
                           },child: Text('View all',
                             style: TextStyle(
                               fontSize: 14,
@@ -362,6 +361,134 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => Divider(),
+                    itemCount: cubit.SuggestJob.length,
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Image(image: NetworkImage(
+                                  cubit.SuggestJob[index]['image'],
+                                ), height: 32, width: 32,),
+                                Expanded(
+                                  flex:4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          cubit.SuggestJob[index]['name'],
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500
+                                          ),
+                                        ),
+                                        Text(
+                                          cubit.SuggestJob[index]['comp_name'],
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex:1,
+                                  child: IconButton(onPressed: () {},
+                                      icon: Icon(
+                                        Iconsax.archive_1
+                                      )),
+                                )
+                              ],
+                            ),
+
+                            Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 35,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(100),
+                                          color: HexColor('#D6E4FF'),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            cubit.SuggestJob[index]['job_time_type'],
+                                            style:TextStyle(
+                                              color: Colors.blueAccent,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 35,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(100),
+                                          color: HexColor('#D6E4FF'),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            cubit.SuggestJob[index]['job_type'],
+                                            style:TextStyle(
+                                              color: Colors.blueAccent,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Expanded(
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize:20,
+                                        ),
+
+                                        cubit.SuggestJob[index]['salary'].toString(),
+                                      ),
+                                      Text(
+                                        '/Month',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+
 
 
             ],

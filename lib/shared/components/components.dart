@@ -135,7 +135,7 @@ Widget buildJobItem(Map model , context) => Center(
             child:
             Row(
               children: [
-
+                    
               ],
             )
             ,

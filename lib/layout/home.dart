@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context)=> HomeCubit.get(context)..get_suggJob(),
+      create: (BuildContext context)=> HomeCubit.get(context)..get_suggJob()..profile(),
       child: BlocConsumer<HomeCubit,HomeState>(
         builder: (context, state) {
           HomeCubit cubit = HomeCubit.get(context);
@@ -24,9 +24,7 @@ class Home extends StatelessWidget {
             key: scaffoldState,
             resizeToAvoidBottomInset: false,
               appBar: AppBar(
-                title: Text(
-                    cubit.pageTitle[cubit.currentIndex]
-                ),
+
               ),
               body: cubit.screens[cubit.currentIndex],
               bottomNavigationBar: Padding(
