@@ -9,8 +9,10 @@ import 'package:jobsque/modules/CreateAccount/typeOfWork_screen.dart';
 import 'package:jobsque/modules/Home/HomeScreen.dart';
 import 'package:jobsque/modules/Home/bloc/home_cubit.dart';
 import 'package:jobsque/modules/Home/bloc/home_state.dart';
+import 'package:jobsque/modules/login/login_screen.dart';
 import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Home extends StatelessWidget {
   const Home({super.key});
   @override
@@ -49,8 +51,14 @@ class Home extends StatelessWidget {
               )
 
           );
-      }, listener: (context, state) {
-
+      }, listener: (context, state) async {
+        // if  (state is HomeGetUserErrorState){
+        //   SharedPreferences prefrences = await SharedPreferences.getInstance();
+        //   // await prefrences.clear();
+        //   await prefrences.remove('uId');
+        //
+        //   navigateTo(context, loginScreen());
+        // }
       },),
     );
 

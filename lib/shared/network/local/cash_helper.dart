@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:jobsque/modules/login/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 //   shared_preferences: ^2.2.2
 class CacheHelper {
@@ -5,6 +8,9 @@ class CacheHelper {
   static init() async { // starting point
     sharedPreferences = await SharedPreferences.getInstance(); // create file
   }
+
+
+
   static Future<bool> putData({  // saving
     required String key ,
     required bool value ,

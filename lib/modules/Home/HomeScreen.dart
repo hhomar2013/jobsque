@@ -10,8 +10,11 @@ import 'package:jobsque/model/jobsModel.dart';
 import 'package:jobsque/model/userModel.dart';
 import 'package:jobsque/modules/Home/bloc/home_cubit.dart';
 import 'package:jobsque/modules/Home/bloc/home_state.dart';
+import 'package:jobsque/modules/login/login_screen.dart';
 import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
+import 'package:jobsque/shared/network/local/cash_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -37,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Hi, ${cubit.user[0]['name']} 👋',
+                        Text('Hi, 👋',
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w500
@@ -97,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                       hintStyle: TextStyle(
                         color: Colors.grey,
                       ),
-                      prefix: Padding(
+                      prefixIcon: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Iconsax.search_normal,
@@ -493,7 +496,7 @@ class HomeScreen extends StatelessWidget {
 
             ],
           );
-        }, listener: (context, state) {
+        }, listener: (context, state) async {
 
     });
 
