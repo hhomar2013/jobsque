@@ -40,7 +40,7 @@ class Home extends StatelessWidget {
                   onTap: (value) {
                     cubit.changeBottomNav(value);
                   },
-                  items: const[
+                  items: [
                     BottomNavigationBarItem(icon: Icon(Iconsax.home) ,label: 'Home'),
                     BottomNavigationBarItem(icon: Icon(Iconsax.message) ,label: 'message'),
                     BottomNavigationBarItem(icon: Icon(Iconsax.briefcase) ,label: 'Applied'),
