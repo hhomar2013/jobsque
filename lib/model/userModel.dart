@@ -1,9 +1,11 @@
 class UserModel{
+  int id;
   String name;
   String email;
   String created_at;
   String updated_at;
   UserModel({
+    required this.id,
     required this.name,
     required this.email,
     required this.created_at,
@@ -12,7 +14,7 @@ class UserModel{
 
   factory UserModel.formJson(Map<String,dynamic>? json){
     return UserModel(
-
+        id: json?['id'],
         name: json?['name'],
         email: json?['email'],
       created_at: json?['created_at'],
@@ -22,6 +24,7 @@ class UserModel{
 
   Map<String,dynamic> toMap(){
     return {
+      'id':id,
       'name' : name,
       'email' : email,
       'created_at' : created_at,

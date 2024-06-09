@@ -11,6 +11,7 @@ import 'package:jobsque/shared/network/local/cash_helper.dart';
 class createAccountCubit extends Cubit<createAccountState>{
   createAccountCubit(): super(createAccountInitial());
   static createAccountCubit get(context) => BlocProvider.of(context);
+  bool  isClicked = false;
   final List<dynamic> user =[];
   // Register
   void register({
@@ -37,16 +38,20 @@ class createAccountCubit extends Cubit<createAccountState>{
   }
 
 
+  void toggleSelection(int index) {
+    // print(index);
+    emit(typOfWorkNewSelect(index));
+  }
 
 
 
   final List<IconMenu> title  =[
    IconMenu(iconName: Iconsax.bezier, titleIcon: 'UI/UX Designer') ,
-   IconMenu(iconName: Icons.photo_camera_front, titleIcon: 'Illustrator Designer') ,
-   IconMenu(iconName: Icons.html, titleIcon: 'Developer') ,
-   IconMenu(iconName: Icons.manage_accounts, titleIcon: 'Management') ,
-   IconMenu(iconName: Icons.lan_rounded, titleIcon: 'Information Technology') ,
-   IconMenu(iconName: Icons.travel_explore_outlined, titleIcon: 'Research and Analytics') ,
+   IconMenu(iconName: Iconsax.pen_tool_2, titleIcon: 'Illustrator Designer') ,
+   IconMenu(iconName: Iconsax.code_1, titleIcon: 'Developer') ,
+   IconMenu(iconName: Iconsax.graph, titleIcon: 'Management') ,
+   IconMenu(iconName: Iconsax.monitor_mobbile, titleIcon: 'Information Technology') ,
+   IconMenu(iconName: Iconsax.cloud_add, titleIcon: 'Research and Analytics') ,
   ];
 
 

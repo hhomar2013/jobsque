@@ -13,3 +13,9 @@ class HomeGetListSuccess extends HomeState{
   // final jobsModel jobModel;
   // HomeGetListSuccess(this.jobModel);
 }
+
+class HomeSavedJobsSuccessState extends HomeState{}
+class HomeSavedJobsErrorState extends HomeState{
+  final error ;
+  HomeSavedJobsErrorState(this.error);
+}

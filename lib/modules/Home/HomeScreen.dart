@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Hi, 👋',
+                        Text('Hi, ${cubit.userName} 👋',
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w500
@@ -140,7 +140,7 @@ class HomeScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(onPressed: () {
-                              print('View all');
+                             cubit.user[0]['name'];
                             },child: Text('View all',
                               style: TextStyle(
                                 fontSize: 14,
@@ -283,13 +283,12 @@ class HomeScreen extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-
+                                        cubit.formatNumber(int.parse(cubit.SuggestJob[index]['salary'])),
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w500,
                                         fontSize: 20,
                                       ),
-                                      cubit.SuggestJob[index]['salary'].toString(),
                                     ),
                                     Text(
                                       '/Month',
@@ -350,7 +349,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(onPressed: () {
-                            cubit.profile();
+                            // print(int.parse(cubit.SuggestJob[0]['salary']));
                           },child: Text('View all',
                             style: TextStyle(
                               fontSize: 14,
@@ -406,7 +405,10 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                   flex:1,
-                                  child: IconButton(onPressed: () {},
+                                  child: IconButton(onPressed: () {
+                                    cubit.savedJobs(cubit.SuggestJob[index]['id']);
+
+                                  },
                                       icon: Icon(
                                         Iconsax.archive_1
                                       )),
@@ -469,8 +471,7 @@ class HomeScreen extends StatelessWidget {
                                           fontWeight: FontWeight.w500,
                                           fontSize:20,
                                         ),
-
-                                        cubit.SuggestJob[index]['salary'].toString(),
+                                        cubit.formatNumber(int.parse(cubit.SuggestJob[index]['salary'])),
                                       ),
                                       Text(
                                         '/Month',
@@ -496,8 +497,12 @@ class HomeScreen extends StatelessWidget {
 
             ],
           );
-        }, listener: (context, state) async {
-
+        }, listener: (context, state)  {
+      if(state is HomeSavedJobsSuccessState){
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Job is Saved')),
+        );
+      }
     });
 
   }

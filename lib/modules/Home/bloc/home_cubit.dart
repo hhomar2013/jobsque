@@ -18,6 +18,8 @@ class HomeCubit extends Cubit<HomeState> {
     static HomeCubit get(context) => BlocProvider.of(context);
     List<Map> user=[];
     int currentIndex = 0;
+    int salary = 0;
+    String userName = '';
     List<Map> SuggestJob = [];
     List<Widget> screens = [
       HomeScreen(),
@@ -39,20 +41,27 @@ class HomeCubit extends Cubit<HomeState> {
       currentIndex = index;
       emit(HomeChangeBottomNav());
     }
-    late UserModel model;
+    late UserModel model_Profile;
     var token = uId.toString();
     void profile(){
       user = [];
+      userName = '';
       DioHelper.getData1(token: token,
           url: '/auth/profile/',
       ).then((value){
         // print(value.data['data']);
-        model = UserModel.formJson(value.data['data']);
+        model_Profile = UserModel.formJson(value.data['data']);
 
-        // print(model);
-        user.add(value.data);
-        // print(user);
+        // print(model_Profile);
+        value.data['data'].forEach((element){
+          user.add(element);
+        });
+        user.toList();
+        userName =  model_Profile.name;
+        print(user.toList());
+        emit(HomeGetUserSuccessState());
       }).catchError((error){
+
         emit(HomeGetUserErrorState(error.toString()));
       });
     }
@@ -72,6 +81,32 @@ class HomeCubit extends Cubit<HomeState> {
       });
     }
 
+    void changNumbersToK(int value){
+      if (value > 1000 ) {
+        salary = value;
+      }
+    }
+
+    void savedJobs(int jobId){
+     DioHelper.postData(
+       token: uId.toString(),
+         url: '/favorites',
+         data: {
+           'job_id' : jobId,
+           'like' : 1,
+         }).then((value) {
+        emit(HomeSavedJobsSuccessState());
+
+     });
+    }
+
+
+    String formatNumber(int number) {
+      if (number >= 1000) {
+        return (number / 1000).toStringAsFixed(1) + ' k';
+      }
+      return number.toString();
+    }
 
 
 }

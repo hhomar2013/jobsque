@@ -42,7 +42,9 @@ class DioHelper {
     required Map<String, dynamic> data,
     Map<String, dynamic>? queryParameters,
     Options? options,
+    String? token,
   }) async {
+    dio?.options.headers['Authorization'] = 'Bearer $token';
     return await dio!.post(
       url,
       data: data,

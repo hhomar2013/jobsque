@@ -8,3 +8,10 @@ class createAccountErrorState extends createAccountState{
   final String onError;
   createAccountErrorState(this.onError);
 }
+
+class typOfWorkNewSelect extends createAccountState{
+  final int index;
+
+  typOfWorkNewSelect(this.index);
+
+}

@@ -14,10 +14,15 @@ class createAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final register_formKey = GlobalKey<FormState>();
+    var _emailController = TextEditingController();
+    var _nameController = TextEditingController();
+    var _passwordController = TextEditingController();
     return BlocProvider(
         create:(BuildContext context) => createAccountCubit(),
         child: BlocConsumer<createAccountCubit,createAccountState>(
             builder: (context, state) {
+
               var cubit = createAccountCubit.get(context);
                 return Container(
                   child: Column(
@@ -25,7 +30,7 @@ class createAccountScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Form(
-                          key: formKey,
+                          key: register_formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +51,7 @@ class createAccountScreen extends StatelessWidget {
                               SizedBox(height: 40,),
 
                               defaultTextField(
-                                  controller:nameController,
+                                  controller:_nameController,
                                   label: "User Name",
                                   type: TextInputType.name,
                                   hintText: "User Name",
@@ -60,7 +65,7 @@ class createAccountScreen extends StatelessWidget {
                               ), //username
                               SizedBox(height: 15,),
                               defaultTextField(
-                                  controller:emailController,
+                                  controller:_emailController,
                                   label: "Email",
                                   type: TextInputType.emailAddress,
                                   hintText: "Email",
@@ -81,7 +86,7 @@ class createAccountScreen extends StatelessWidget {
                               ),//email
                               SizedBox(height: 15,),
                               defaultTextField(
-                                  controller:passwordController,
+                                  controller:_passwordController,
                                   label: "Password",
                                   type: TextInputType.text,
                                   hintText: "Password",
@@ -145,14 +150,16 @@ class createAccountScreen extends StatelessWidget {
                               backgroundColor: HexColor('#3366FF'),
                             ),
                             onPressed: (){
-                              if (formKey.currentState!.validate()) {
+                              if (register_formKey.currentState!.validate()) {
                                   cubit.register(
-                                      name: nameController.text,
-                                      email: emailController.text,
-                                      password: passwordController.text
+                                      name: _nameController.text,
+                                      email: _emailController.text,
+                                      password: _passwordController.text
                                   );
-                                  navigateTo(context, Home());
+                                  navigateTo(context, typeOfWorkScreen());
                               }
+
+
                             },
                             child: Text('Create account',
                               style: TextStyle(
