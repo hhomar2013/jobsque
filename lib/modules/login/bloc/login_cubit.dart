@@ -14,9 +14,9 @@ class LoginCubit extends Cubit<loginState>{
   static LoginCubit get(context) => BlocProvider.of(context);
   bool? isChecked =false;
   final List<dynamic> user =[];
+  String? token;
   // Register
   void login({
-
     required String email,
     required String password,
 }) {
@@ -25,9 +25,12 @@ class LoginCubit extends Cubit<loginState>{
         url: '/auth/login',
         data: {'email': email, 'password': password}
     ).then((value) {
-      emit(loginSuccessState());
-      CacheHelper.saveData(key: 'token', value: value.data['token']);
-
+      emit(loginSuccessState(value.data['token']));
+      // CacheHelper.sharedPreferences.remove('token');
+      // CacheHelper.saveData(key: 'token', value: value.data['token']);
+      // token = CacheHelper.getData2(key: 'token');
+      // uId = token.toString();
+      // print(uId);
     }).onError((error, stackTrace) {
       print(error.toString());
       emit(loginErrorState((error.toString())));

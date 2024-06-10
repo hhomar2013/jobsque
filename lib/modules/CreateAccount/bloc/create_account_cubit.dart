@@ -25,7 +25,7 @@ class createAccountCubit extends Cubit<createAccountState>{
         data: {'name': name, 'email': email, 'password': password}
     ).then((value) {
       emit(createAccountSuccessState());
-      CacheHelper.saveData(key: 'token', value: value.data['token']);
+      // CacheHelper.saveData(key: 'token', value: value.data['token']);
       print(value);
     }).onError((error, stackTrace) {
       print(error.toString());

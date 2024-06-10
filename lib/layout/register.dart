@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jobsque/modules/CreateAccount/createAccount_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+  // const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

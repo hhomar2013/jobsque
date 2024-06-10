@@ -10,7 +10,7 @@ import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
 
 class createAccountScreen extends StatelessWidget {
-  const createAccountScreen({super.key});
+  // const createAcc/ountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

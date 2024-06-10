@@ -21,6 +21,7 @@ class HomeCubit extends Cubit<HomeState> {
     int salary = 0;
     String userName = '';
     List<Map> SuggestJob = [];
+    List<Map> allJobs = [];
     List<Widget> screens = [
       HomeScreen(),
       MessageScreen(),
@@ -28,7 +29,6 @@ class HomeCubit extends Cubit<HomeState> {
       SavedScreen(),
       ProfileScreen(),
     ];
-
     List <String> pageTitle = [
       'Home',
       'Message',
@@ -36,7 +36,6 @@ class HomeCubit extends Cubit<HomeState> {
       'Saved',
       'Profile',
     ];
-
     void changeBottomNav(int index){
       currentIndex = index;
       emit(HomeChangeBottomNav());
@@ -49,46 +48,57 @@ class HomeCubit extends Cubit<HomeState> {
       DioHelper.getData1(token: token,
           url: '/auth/profile/',
       ).then((value){
-        // print(value.data['data']);
+        emit(HomeGetUserSuccessState());
         model_Profile = UserModel.formJson(value.data['data']);
 
-        // print(model_Profile);
         value.data['data'].forEach((element){
           user.add(element);
         });
-        user.toList();
-        userName =  model_Profile.name;
-        print(user.toList());
-        emit(HomeGetUserSuccessState());
-      }).catchError((error){
 
+        userName =  model_Profile.name;
+        print(user);
+
+      }).catchError((error){
         emit(HomeGetUserErrorState(error.toString()));
+        print(error.toString());
       });
     }
     // late jobsModel jobModel;
     void get_suggJob() {
       SuggestJob = [];
       emit(HomeLoadingState());
+
       DioHelper.getData1(
           token: token,
-          url: '/jobs/'
+          url: '/jobs'
       ).then((value) {
+        emit(HomeGetListSuccess());
         value.data['data'].forEach((element){
           SuggestJob.add(element);
-          print(SuggestJob.length);
         });
-        emit(HomeGetListSuccess());
       });
     }
 
-    void changNumbersToK(int value){
-      if (value > 1000 ) {
-        salary = value;
-      }
+
+    void get_all_jobs() {
+      allJobs = [];
+      emit(HomeLoadingState());
+
+      DioHelper.getData1(
+          token: token,
+          url: '/jobs/sugest/4'
+      ).then((value) {
+        emit(HomeGetListSuccess());
+        value.data['data'].forEach((element){
+          allJobs.add(element);
+        });
+        print(allJobs);
+      });
     }
 
+
     void savedJobs(int jobId){
-     DioHelper.postData(
+     DioHelper.postData1(
        token: uId.toString(),
          url: '/favorites',
          data: {
@@ -108,6 +118,13 @@ class HomeCubit extends Cubit<HomeState> {
       return number.toString();
     }
 
+  void checkuId(){
+      if(token == ''){
+        emit(HomeErrorAuth());
+      }else{
+        emit(HomeGetListSuccess());
+      }
+  }
 
 }
 

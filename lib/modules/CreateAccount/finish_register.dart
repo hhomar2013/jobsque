@@ -4,7 +4,7 @@ import 'package:jobsque/modules/login/login_screen.dart';
 import 'package:jobsque/shared/components/components.dart';
 
 class finishRegister extends StatelessWidget {
-  const finishRegister({super.key});
+  // const finishRegister({super.key});
 
   @override
   Widget build(BuildContext context) {

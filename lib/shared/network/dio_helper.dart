@@ -41,6 +41,22 @@ class DioHelper {
     required String url,
     required Map<String, dynamic> data,
     Map<String, dynamic>? queryParameters,
+    Options? options
+  }) async {
+
+    return await dio!.post(
+      url,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+    );
+  }
+
+
+  static Future<Response> postData1({
+    required String url,
+    required Map<String, dynamic> data,
+    Map<String, dynamic>? queryParameters,
     Options? options,
     String? token,
   }) async {
@@ -52,7 +68,6 @@ class DioHelper {
       options: options,
     );
   }
-
 
 
 
