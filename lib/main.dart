@@ -17,9 +17,9 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-  WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   isHome = CacheHelper.getData(key: 'isHome');
   uId = CacheHelper.getData2(key: 'token');
@@ -30,8 +30,9 @@ Future<void> main() async{
 }
 class MyApp extends StatelessWidget {
   final isHome;
-  final uId;
-  const MyApp(this.isHome ,this.uId);
+  final uid;
+  const MyApp(this.isHome ,this.uid);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -62,8 +63,7 @@ class MyApp extends StatelessWidget {
                   ),
                 )
                  , nextScreen:
-              isHome == false || isHome == null ? OnboardScreen()
-                  : uId == false || uId == null ? loginScreen() : Home()  ),);
+              isHome == false || isHome == null ? OnboardScreen() : Home()));
           },
         ));
 

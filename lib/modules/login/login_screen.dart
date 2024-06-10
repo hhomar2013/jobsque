@@ -12,19 +12,22 @@ import 'package:jobsque/modules/login/bloc/login_cubit.dart';
 import 'package:jobsque/modules/login/bloc/login_state.dart';
 import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
+import 'package:jobsque/shared/network/local/cash_helper.dart';
 
 class loginScreen extends StatelessWidget {
-  const loginScreen({super.key});
-
+  // const loginScreen({super.key});
+  
   @override
   Widget build(BuildContext context) {
-    var emailLoginController = TextEditingController();
-    var passwordLoginController = TextEditingController();
-    final loginformKey = GlobalKey<FormState>();
+    var Login_emailLoginController = TextEditingController();
+    var Login_passwordLoginController = TextEditingController();
+    GlobalKey<FormState> loginformKey = GlobalKey<FormState>();
     return BlocProvider(
         create:(BuildContext context) => LoginCubit(),
         child: BlocConsumer<LoginCubit,loginState>(
             builder: (context, state) {
+              print(uId);
+
               var cubit = LoginCubit.get(context);
                 return  Scaffold(
                   resizeToAvoidBottomInset: false,
@@ -54,7 +57,7 @@ class loginScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: 40,),
                                 defaultTextField(
-                                    controller:emailLoginController,
+                                    controller:Login_emailLoginController,
                                     label: "Email",
                                     type: TextInputType.emailAddress,
                                     hintText: "Email",
@@ -71,13 +74,13 @@ class loginScreen extends StatelessWidget {
                                         return "Enter valid email";
                                       }
                                       return null;
-
-
-                                    }
+                                    },
+                                  onTap: ()=>null,
+                                  onSubmit: ()=>null,
                                 ),//email
                                 SizedBox(height: 15,),
                                 defaultTextField(
-                                    controller:passwordLoginController,
+                                    controller:Login_passwordLoginController,
                                     label: "Password",
                                     type: TextInputType.text,
                                     hintText: "Password",
@@ -94,7 +97,9 @@ class loginScreen extends StatelessWidget {
                                         return 'Password must be at least 8 characters';
                                       }
                                       return null;
-                                    }
+                                    },
+                                  onTap: ()=>null,
+                                  onSubmit: ()=>null,
                                 ),//Password
                                 SizedBox(height: 10,),
                                 Row(
@@ -176,11 +181,14 @@ class loginScreen extends StatelessWidget {
                               onPressed: (){
                                 if (loginformKey.currentState!.validate()) {
                                   cubit.login(
-                                      email: emailLoginController.text,
-                                      password: passwordLoginController.text
+                                      email: Login_emailLoginController.text,
+                                      password: Login_passwordLoginController.text
                                   );
-                                  navigateTo(context, Home());
+                                  // print('Token -> $uId');
+                                  // navigateTo(context, Home());
                                 }
+
+
                               },
                               child: Text('Login',
                                 style: TextStyle(
@@ -257,6 +265,16 @@ class loginScreen extends StatelessWidget {
                 );
             },
           listener: (context, state) {
+
+              if(state is loginSuccessState){
+                  CacheHelper.saveData(key: 'token', value: state.uId)
+                      .then((value) =>
+                      navigateTo(context, Home()));
+              }
+              
+              if(state is loginErrorState){
+                CacheHelper.sharedPreferences.remove('token');
+              }
 
           },
         ),

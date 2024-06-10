@@ -10,7 +10,6 @@ class CacheHelper {
   }
 
 
-
   static Future<bool> putData({  // saving
     required String key ,
     required bool value ,

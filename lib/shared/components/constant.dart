@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 
-bool? isHome;String uId = '';
+bool? isHome; String? uId;
 
 var titleController = TextEditingController();
 var timeController = TextEditingController();

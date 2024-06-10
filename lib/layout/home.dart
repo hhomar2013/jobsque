@@ -12,13 +12,14 @@ import 'package:jobsque/modules/Home/bloc/home_state.dart';
 import 'package:jobsque/modules/login/login_screen.dart';
 import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
+import 'package:jobsque/shared/network/local/cash_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Home extends StatelessWidget {
-  const Home({super.key});
+  // const Home({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context)=> HomeCubit.get(context)..get_suggJob()..profile(),
+      create: (BuildContext context)=> HomeCubit.get(context)..get_suggJob()..profile()..checkuId(),
       child: BlocConsumer<HomeCubit,HomeState>(
         builder: (context, state) {
           HomeCubit cubit = HomeCubit.get(context);
@@ -28,7 +29,7 @@ class Home extends StatelessWidget {
               appBar: AppBar(
 
               ),
-              body: cubit.screens[cubit.currentIndex],
+              body:  cubit.screens[cubit.currentIndex] ,
               bottomNavigationBar: Padding(
                 padding: const EdgeInsets.all(15),
                 child: BottomNavigationBar(
@@ -51,15 +52,17 @@ class Home extends StatelessWidget {
               )
 
           );
-      }, listener: (context, state) async {
-        // if  (state is HomeGetUserErrorState){
-        //   SharedPreferences prefrences = await SharedPreferences.getInstance();
-        //   // await prefrences.clear();
-        //   await prefrences.remove('uId');
-        //
-        //   navigateTo(context, loginScreen());
-        // }
-      },),
+      },
+        listener: (context, state) {
+          if(state is HomeSavedJobsSuccessState){
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Job is Saved')),
+            );
+          }
+          if(state is HomeErrorAuth){
+            navigateTo(context, loginScreen());
+          }
+        } ),
     );
 
 

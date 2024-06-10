@@ -4,7 +4,7 @@ import 'package:jobsque/modules/Home/bloc/home_cubit.dart';
 import 'package:jobsque/modules/Home/bloc/home_state.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  // const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

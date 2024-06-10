@@ -9,7 +9,7 @@ import 'package:jobsque/modules/Home/bloc/home_state.dart';
 import 'package:jobsque/shared/components/components.dart';
 
 class MessageScreen extends StatelessWidget {
-  const MessageScreen({super.key});
+  // const MessageScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

@@ -18,19 +18,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
+  // const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     // print(uId);
     return BlocConsumer<HomeCubit,HomeState>(
-
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
-          if(state is HomeGetListSuccess){
-            // print(state.jobModel);
-          }
-
           return Column(
             children: [
               Row(
@@ -63,7 +57,10 @@ class HomeScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal:20),
                             child: Container(
                               child: IconButton(onPressed: () {
-                                print('notification');
+                                CacheHelper.sharedPreferences.remove('token');
+                                navigateTo(context, loginScreen());
+
+                                // print(uId.toString());
                               }, icon: Icon(
                                 Icons.notifications_outlined,
                                 size: 30,
@@ -140,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(onPressed: () {
-                             cubit.user[0]['name'];
+                             cubit.get_all_jobs();
                             },child: Text('View all',
                               style: TextStyle(
                                 fontSize: 14,
@@ -497,13 +494,7 @@ class HomeScreen extends StatelessWidget {
 
             ],
           );
-        }, listener: (context, state)  {
-      if(state is HomeSavedJobsSuccessState){
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Job is Saved')),
-        );
-      }
-    });
+        }, listener: (context, state)  {});
 
   }
 }

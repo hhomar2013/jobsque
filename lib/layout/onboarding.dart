@@ -14,7 +14,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 
 class OnboardScreen extends StatelessWidget {
-  const OnboardScreen({super.key});
+  // const OnboardScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

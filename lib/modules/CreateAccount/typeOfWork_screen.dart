@@ -8,7 +8,7 @@ import 'package:jobsque/shared/components/components.dart';
 import 'package:jobsque/shared/components/constant.dart';
 
 class typeOfWorkScreen extends StatelessWidget {
-  typeOfWorkScreen({super.key});
+  // typeOfWorkScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
