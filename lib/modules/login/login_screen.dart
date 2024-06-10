@@ -26,7 +26,7 @@ class loginScreen extends StatelessWidget {
         create:(BuildContext context) => LoginCubit(),
         child: BlocConsumer<LoginCubit,loginState>(
             builder: (context, state) {
-              print(uId);
+
 
               var cubit = LoginCubit.get(context);
                 return  Scaffold(
@@ -185,7 +185,7 @@ class loginScreen extends StatelessWidget {
                                       password: Login_passwordLoginController.text
                                   );
                                   // print('Token -> $uId');
-                                  // navigateTo(context, Home());
+                                  navigateTo(context, Home());
                                 }
 
 
@@ -265,11 +265,13 @@ class loginScreen extends StatelessWidget {
                 );
             },
           listener: (context, state) {
-
               if(state is loginSuccessState){
                   CacheHelper.saveData(key: 'token', value: state.uId)
-                      .then((value) =>
-                      navigateTo(context, Home()));
+                      .then((value) {
+                    // navigateTo(context, Home());
+                    // print(state.uId);
+                  }
+                  );
               }
               
               if(state is loginErrorState){

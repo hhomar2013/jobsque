@@ -98,7 +98,8 @@ class OnboardScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(9.0),
                           child: ElevatedButton(onPressed: (){
-                            cubit.nextPage();print(cubit.currentIndex);
+                            cubit.nextPage();
+                            // print(cubit.currentIndex);
                             if (cubit.currentIndex <= cubit.Screens.length -1){
                               controller.nextPage(
                                   duration: Duration(microseconds: 2000)

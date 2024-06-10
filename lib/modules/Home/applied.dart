@@ -5,6 +5,6 @@ class AppliedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const  Text('Applied');
+    return const  Text('Appliedaaaa');
   }
 }

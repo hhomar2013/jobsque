@@ -16,10 +16,12 @@ class DioHelper {
   static Future<Response> getData1({
     required String url,
     required String token,
+    Map<String , dynamic>? query,
     Options? options
   })async{
     dio?.options.headers['Authorization'] = 'Bearer $token';
     return await dio!.get(
+        queryParameters: query,
         url,
         // options:options
     );

@@ -49,15 +49,11 @@ class HomeCubit extends Cubit<HomeState> {
           url: '/auth/profile/',
       ).then((value){
         emit(HomeGetUserSuccessState());
-        model_Profile = UserModel.formJson(value.data['data']);
-
-        value.data['data'].forEach((element){
-          user.add(element);
-        });
-
-        userName =  model_Profile.name;
-        print(user);
-
+        // model_Profile = UserModel.formJson(value.data['data']);
+        // value.data['data'].forEach((element){
+        //   user.add(element);
+        // });
+        user.add(value.data['data']);
       }).catchError((error){
         emit(HomeGetUserErrorState(error.toString()));
         print(error.toString());
@@ -70,9 +66,10 @@ class HomeCubit extends Cubit<HomeState> {
 
       DioHelper.getData1(
           token: token,
-          url: '/jobs'
+          url: '/jobs',
       ).then((value) {
         emit(HomeGetListSuccess());
+        // print(value.data);
         value.data['data'].forEach((element){
           SuggestJob.add(element);
         });
@@ -83,7 +80,6 @@ class HomeCubit extends Cubit<HomeState> {
     void get_all_jobs() {
       allJobs = [];
       emit(HomeLoadingState());
-
       DioHelper.getData1(
           token: token,
           url: '/jobs/sugest/4'
@@ -119,10 +115,8 @@ class HomeCubit extends Cubit<HomeState> {
     }
 
   void checkuId(){
-      if(token == ''){
+      if(token == false){
         emit(HomeErrorAuth());
-      }else{
-        emit(HomeGetListSuccess());
       }
   }
 

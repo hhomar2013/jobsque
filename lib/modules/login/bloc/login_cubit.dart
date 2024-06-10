@@ -26,7 +26,7 @@ class LoginCubit extends Cubit<loginState>{
         data: {'email': email, 'password': password}
     ).then((value) {
       CacheHelper.saveData(key: 'token', value: value.data['token']);
-      emit(loginSuccessState());
+      emit(loginSuccessState(value.data['token']));
 
 
     }).onError((error, stackTrace) {

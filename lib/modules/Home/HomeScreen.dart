@@ -25,6 +25,9 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<HomeCubit,HomeState>(
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
+          var user_info = cubit.user;
+
+
           return Column(
             children: [
               Row(
@@ -34,7 +37,8 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Hi, ${cubit.userName} 👋',
+                        for( var info in user_info)
+                        Text('Hi, ${info['name']} 👋',
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w500
@@ -59,7 +63,6 @@ class HomeScreen extends StatelessWidget {
                               child: IconButton(onPressed: () {
                                 CacheHelper.sharedPreferences.remove('token');
                                 navigateTo(context, loginScreen());
-
                                 // print(uId.toString());
                               }, icon: Icon(
                                 Icons.notifications_outlined,

@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context)=> HomeCubit.get(context)..get_suggJob()..profile()..checkuId(),
+      create: (BuildContext context)=> HomeCubit.get(context)..get_suggJob()..checkuId(),
       child: BlocConsumer<HomeCubit,HomeState>(
         builder: (context, state) {
           HomeCubit cubit = HomeCubit.get(context);
